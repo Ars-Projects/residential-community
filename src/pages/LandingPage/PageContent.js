@@ -14,6 +14,13 @@ import {
   withStyles,
   lighten,
   darken } from '@material-ui/core/styles'
+import positivity from "./positivity.jpg";
+import amenities from "./amenities.jpg";
+import openspace from "./openspace1.jpg";
+import allAmenities from "./amenities.png"
+import CardMedia from '@material-ui/core/CardMedia';
+import {Flip, Slide, Roll} from 'react-reveal';
+import cardBg from "./Aboutus1.jpg"
 
   const LightTooltip = withStyles((theme) => {
   const getBackgroundColor = theme.palette.type === 'light' ? lighten : darken;
@@ -27,7 +34,7 @@ tooltip: {
 }
 }})(Tooltip);
 
-const PackageCard = ({ title, command, description, icons }) => {
+const PackageCard = ({ title, command, description, icons, image }) => {
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
     setOpen(true)
@@ -38,19 +45,32 @@ const PackageCard = ({ title, command, description, icons }) => {
 
   return (
     <Card elevation={4} style={{ margin: 18, maxWidth: 350 }}>
-      <CardContent>
+      <CardContent style={{
+            color: "#fff",
+            background: `url(${image})`,
+            
+          }}>
         <Typography gutterBottom variant="h4" component="h2">
           {title}
         </Typography>
-        <div
+        <CardMedia
+        // className={classes.media}
+        style={{
+          height: 0,
+          paddingTop: '56.25%', // 16:9
+        }}
+        image={image}
+        title="Paella dish"
+        />
+        {/* <div
           style={{
             display: 'flex',
             flexDirection: 'row',
             backgroundColor: '#F3F4F4',
             padding: 8,
           }}
-        >
-          <Typography
+        > */}
+          {/* <Typography
             gutterBottom
             variant="body1"
             color="textSecondary"
@@ -59,7 +79,7 @@ const PackageCard = ({ title, command, description, icons }) => {
             {command}
           </Typography>
           {/* <Tooltip */}
-          <LightTooltip
+          {/* <LightTooltip
             title={
             <Button
               color='inherit'
@@ -71,8 +91,8 @@ const PackageCard = ({ title, command, description, icons }) => {
             placement="bottom"
             open={open}
             leaveDelay={1000}
-            onClose={handleClose} >
-          <IconButton
+            onClose={handleClose} > */} 
+          {/* <IconButton
             aria-label="Icon button"
             onClick={() => {
               if (window.clipboardData) {
@@ -85,14 +105,14 @@ const PackageCard = ({ title, command, description, icons }) => {
               }
               handleClick()
             }}
-          >
-            <FileCopy />
-          </IconButton>
-          </LightTooltip>
-        </div>
-        <br />
+          > */}
+            {/* <FileCopy />
+          </IconButton> */}
+          {/* </LightTooltip> */}
+        {/* </div> */}
+        {/* <br />
         {icons}
-        <br />
+        <br /> */}
         <Typography variant="body2" component="div">
           {description}
         </Typography>
@@ -104,24 +124,39 @@ const PackageCard = ({ title, command, description, icons }) => {
 const PageContent = ({ setComponents }) => {
   return (
     <React.Fragment>
-      <div style={{ height: 20 }} />
+      <div style={{ height: 10 }} />
+
+      <Flip left>
       <Typography
         variant="h3"
         //color="textSecondary"
         style={{ margin: 16, textAlign: 'center' }}
       >
-        A solution for every project
+        Our Motto
       </Typography>
+      </Flip>
+      <Roll right>
       <Typography
         variant="h5"
         component="div"
         color="textSecondary"
         style={{ margin: 16, textAlign: 'center' }}
       >
-        Choose from 3 different starter kits. From a basic one to a full
-        featured application.
+Strive to make you feel home where we all belong, connect, share knowledge, encourage talent and be more together, everyday!
       </Typography>
-      <div style={{ height: 30 }} />
+      </Roll>
+
+      <Flip right>
+      <Typography
+        variant="h3"
+        //color="textSecondary"
+        style={{ margin: 16, textAlign: 'center' }}
+      >
+        We offer
+      </Typography>
+      </Flip>
+
+      <div style={{ height: 10 }} />
 
       <div
         style={{
@@ -132,12 +167,14 @@ const PageContent = ({ setComponents }) => {
           flexWrap: 'wrap',
         }}
       >
+        <Slide right>
         <PackageCard
-          title={'base-shell'}
+          title={'Positive Environment'}
           command={'npx create-react-app my-app --template base'}
           description={
-            'The basic react setup: routing, internationalization and async load.'
+            'Positive and nurturing environment Warm, lively & caring neighborhood'
           }
+          image={positivity}
           icons={
             <div
               style={{
@@ -154,12 +191,15 @@ const PageContent = ({ setComponents }) => {
             </div>
           }
         />
+        </Slide>
+        <Slide bottom>
         <PackageCard
-          title={'material-ui-shell'}
+          title={'Green and Open Spaces'}
           command={'npx create-react-app my-app --template material-ui'}
           description={
-            'Includes all features from the base shell expanded with Material-UI.'
+            'Lush green open spaces Dedicated recreational areas for kids and elderly'
           }
+          image={openspace}
           icons={
             <div
               style={{
@@ -177,10 +217,14 @@ const PageContent = ({ setComponents }) => {
             </div>
           }
         />
+        </Slide>
+
+        <Slide left>
         <PackageCard
-          title={'rmw-shell'}
+          title={'Life enhancing amenities'}
           command={'npx create-react-app my-app --template rmw'}
-          description={'Base shell + Material UI shell + Firebase'}
+          description={'Life enhancing amenities to make your stay enjoyable. Well-equipped for day-to-day grocery, grooming & health needs'}
+          image={amenities}
           icons={
             <div
               style={{
@@ -199,6 +243,7 @@ const PageContent = ({ setComponents }) => {
             </div>
           }
         />
+        </Slide>
       </div>
       <div style={{ height: 30 }} />
       <div
@@ -210,24 +255,26 @@ const PageContent = ({ setComponents }) => {
         style={{
           //height: 400,
           backgroundColor: '#2D2D2D',
-          backgroundImage: 'radial-gradient( #4F4F4F,#242424)',
+          backgroundImage: `url(${cardBg})`,
         }}
       >
         <div style={{ height: 30 }} />
+        <Slide bottom>
         <Typography
           variant="h3"
           //color="textSecondary"
-          style={{ margin: 16, textAlign: 'center', color: 'white' }}
+          style={{ margin: 16, textAlign: 'center', color: 'black' }}
         >
-          Not just a template
+          About Us
         </Typography>
-        <Typography
+        </Slide>
+        {/* <Typography
           variant="h5"
           component="div"
           style={{ margin: 16, textAlign: 'center', color: 'grey' }}
         >
           But also not a framework.
-        </Typography>
+        </Typography> */}
         <div
           style={{
             width: '100%',
@@ -237,15 +284,18 @@ const PageContent = ({ setComponents }) => {
         >
           <TrackChanges style={{ fontSize: 150, color: 'white' }} />
         </div>
+        <Flip left>
         <Typography
           variant="h5"
           component="div"
           style={{ margin: 16, textAlign: 'center', color: 'grey' }}
         >
-          You start easy like with every other template but you can also update
-          the template parts over the time. And with the updates you don't only
-          update the components but also get new features and get bugfixes.
+          Designed for comfort thoughtfully and immaculately, located in Electronic City, Phase 1, Bangalore, Prestige Sunrise Park (PSP) offers a choice of tastefully designed apartments for you and your family. 
+Prestige Sunrise Park is the location of 2 Blocks – Birchwood and Norwood, home to 1910 apartments of many stages, offering a simple and splendor lifestyle with ample space, natural lighting, and stunning finishes.
+Through the environmental-friendly concepts of New Urbanism, PSP offers need a line or two on solar panels, WTP, smart lights in common areas and other such environment focused facilities
+
         </Typography>
+        </Flip>
         <div style={{ height: 50 }} />
       </div>
 
@@ -255,9 +305,9 @@ const PageContent = ({ setComponents }) => {
         //color="textSecondary"
         style={{ margin: 16, textAlign: 'center' }}
       >
-        Only the best
+        Amenities offered
       </Typography>
-      <Typography
+      {/* <Typography
         variant="h5"
         component="div"
         color="textSecondary"
@@ -265,7 +315,7 @@ const PageContent = ({ setComponents }) => {
       >
         Every template is a collection of very carefully picked packages and
         projects. Only the creme de la creme of the react ecosystem
-      </Typography>
+      </Typography> */}
       <div style={{ height: 30 }} />
       <div
         style={{
@@ -275,9 +325,9 @@ const PageContent = ({ setComponents }) => {
           flexWrap: 'wrap',
         }}
       >
-        <img src="react.png" alt="react" style={{ width: 150 }} />
-        <img src="material-ui.png" alt="react" style={{ width: 150 }} />
-        <img src="firebase.png" alt="react" style={{ width: 150 }} />
+        <img src={allAmenities} alt="react" style={{ width: 750 }} />
+        {/* <img src="material-ui.png" alt="react" style={{ width: 150 }} />
+        <img src="firebase.png" alt="react" style={{ width: 150 }} /> */}
       </div>
       <div style={{ height: 50 }} />
     </React.Fragment>

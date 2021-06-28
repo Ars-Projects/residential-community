@@ -10,6 +10,10 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
 import { useHistory } from 'react-router-dom'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+import background from "./homepage.jpg";
+import cardBg from "./Aboutus.jpg"
+import {Zoom, Fade, Roll} from 'react-reveal';
+
 const PageContent = lazy(() => import('./PageContent'))
 const Footer = lazy(() => import('./Footer'))
 const ResponsiveMenu = lazy(() =>
@@ -48,7 +52,7 @@ const LandingPage = () => {
       onClick: () => history.push('/dashboard'),
     },
     {
-      name: 'components',
+      name: 'about us',
       onClick: () => {
         setScrolled(true)
         setTimeout(() => {
@@ -83,7 +87,7 @@ const LandingPage = () => {
             }
           />
 
-          <title>React Most Wanted</title>
+          <title>Prestige Sunrise Park</title>
         </Helmet>
         <Scrollbars
           ref={(e) => {
@@ -144,20 +148,23 @@ const LandingPage = () => {
             </Toolbar>
           </AppBar>
           <div style={{ width: '100%', height: '100%' }}>
+
             <div
               ref={(r) => r && setTop(r)}
               style={{
                 height: '100vh',
                 width: '100%',
-                backgroundColor: 'black',
+                backgroundColor: 'blue',
                 backgroundRepeat: 'no-repeat',
                 backgroundAttachment: 'fixed',
+                backgroundImage: `url(${background})`,
                 backgroundSize: 'cover',
                 display: 'flex',
                 justifyContent: 'center',
                 minHeight: 600,
               }}
             >
+
               <div
                 style={{
                   display: 'flex',
@@ -166,13 +173,18 @@ const LandingPage = () => {
                   flexDirection: 'column',
                 }}
               >
-                <img
+                {/* <img
+                  src={'./homepage.jpg'}
+                  style={{ height: 150, maxWidth: 280, justifySelf: 'center' }}
+                /> */}
+                {/* <img
                   src={'/rmw.svg'}
                   alt="logo"
                   style={{ height: 150, maxWidth: 280, justifySelf: 'center' }}
-                />
+                /> */}
 
                 <div style={{ padding: 8 }}>
+                <Roll right>
                   <h3
                     style={{
                       color: 'red',
@@ -181,9 +193,11 @@ const LandingPage = () => {
                       fontSize: 50,
                     }}
                   >
-                    REACT MOST WANTED
+                    Prestige Sunrise Park
                   </h3>
+                  </Roll>
 
+                  <Roll left>
                   <h4
                     style={{
                       color: 'white',
@@ -192,8 +206,9 @@ const LandingPage = () => {
                       marginTop: -40,
                     }}
                   >
-                    React Starter-Kit with all Most Wanted features
+                    Welcome to Prestige Sunrise Park, a place we call “Home” 
                   </h4>
+                  </Roll>
                 </div>
               </div>
             </div>
@@ -203,7 +218,7 @@ const LandingPage = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginTop: -80,
+                marginTop: -40,
               }}
             >
               <Paper
@@ -213,6 +228,9 @@ const LandingPage = () => {
                   maxWidth: '90%',
                   borderRadius: 15,
                   minHeight: 400,
+                  background:`url(${cardBg})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundAttachment: 'fixed',
                 }}
               >
                 <div
@@ -243,7 +261,7 @@ const LandingPage = () => {
                 </div>
                 {scrolled && (
                   <Suspense fallback={<CircularProgress />}>
-                    <PageContent setComponents={setComponents} />
+                      <PageContent setComponents={setComponents} />
                   </Suspense>
                 )}
               </Paper>

@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px 20px;
+    /* border: 6px solid #1C6EA4; */
+    width: 100vw;
+  }
+  
+  .card {
+    margin: 0 2% !important;
+  }
+  
+  .infected {
+    -webkit-box-shadow: -1px 5px 15px 5px #000000; 
+    box-shadow: -1px 5px 15px 5px #000000;
+    /* height: 250px;
+    width: 200px; */
+    width: 20vw;
+    font-size: small;
+    border-top:40px solid rgba(235, 7, 7, 0.89);
+    /* background-color: rgb(241, 70, 3); */
+    /* border-top: 20px solid rgba(235, 7, 7, 0.89); */
+  }
+  .recovered{
+    -webkit-box-shadow: -1px 5px 15px 5px #000000; 
+    box-shadow: -1px 5px 15px 5px #000000;
+    width: 20vw;
+    /* height: 250px;
+    width: 200px; */
+    font-size: small;
+    border-top: 40px solid rgba(44, 228, 7, 0.5);;
+    /* background-color: rgb(4, 240, 4); */
+    /* border-top: 20px solid rgba(44, 228, 7, 0.5); */
+  }
+  
+  .precaution{ 
+    -webkit-box-shadow: -1px 5px 15px 5px #000000; 
+    box-shadow: -1px 5px 15px 5px #000000;
+    width: 20vw;
+    /* height: 250px;
+    width: 200px; */
+    font-size: small;
+    border-top: 40px solid rgba(77, 3, 77, 0.233);
+    /* background-color: rgb(6, 131, 173); */
+    /* border-bottom: 20px solid rgba(255, 0, 255, 0.5); */
+  }
+  
+  .maid{
+    -webkit-box-shadow: -1px 5px 15px 5px #000000; 
+    box-shadow: -1px 5px 15px 5px #000000;
+    width: 20vw;
+    /* height: 250px;
+    width: 200px; */
+    font-size: small;
+    border-top: 40px solid rgba(255, 0, 157, 0.5);
+    /* background-color: rgb(6, 131, 173); */
+    /* border-bottom: 20px solid rgba(255, 0, 255, 0.5); */
+  }
+  @media only screen and (max-width: 770px) {
+    .card {
+      margin: 2% 0 !important;
+    }
+  }  

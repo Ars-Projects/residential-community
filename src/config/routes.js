@@ -16,6 +16,9 @@ const FirebaseMessaging = lazy(() => import('../pages/Firebase/Messaging'))
 const FirebasePaths = lazy(() => import('../pages/Firebase/Paths'))
 const FirebaseStorage = lazy(() => import('../pages/Firebase/Storage'))
 const Dashboard = lazy(() => import('../pages/Dashboard'))
+const Notice = lazy(() => import('../pages/Notice'))
+const Blog = lazy(() => import('../pages/Blog'))
+const BlogArticle = lazy(() => import('../pages/Blog/BlogArticle'))
 const Posts = lazy(() => import('../pages/Demo/Posts/Posts'))
 const Post = lazy(() => import('../pages/Demo/Posts/Post'))
 const GettingStarted = lazy(() =>
@@ -23,32 +26,35 @@ const GettingStarted = lazy(() =>
 )
 
 const routes = [
-  <Route path="/about" exact component={About} />,
+  // <Route path="/about" exact component={About} />,
   <Route path="/docu/getting_started" exact component={GettingStarted} />,
   <AuthorizedRoute path="/dashboard" exact component={Dashboard} />,
-  <AuthorizedRoute path="/firebase_paths" exact component={FirebasePaths} />,
-  <AuthorizedRoute path="/firebase_lists" exact component={FirebaseLists} />,
-  <AuthorizedRoute path="/firebase_docs" exact component={FirebaseDocs} />,
-  <AuthorizedRoute path="/firebase_cols" exact component={FirebaseCols} />,
-  <AuthorizedRoute path="/admin" exact component={Admin} />,
-  <AuthorizedRoute path="/companies" exact component={Companies} />,
-  <AuthorizedRoute path="/companies/:uid" exact component={Company} />,
-  <AuthorizedRoute path="/create_company" exact component={Company} />,
-  <AuthorizedRoute path="/tasks" exact component={Tasks} />,
-  <AuthorizedRoute path="/tasks/:uid" exact component={Task} />,
-  <AuthorizedRoute path="/create_task" exact component={Task} />,
-  <AuthorizedRoute path="/posts" exact component={Posts} />,
-  <AuthorizedRoute path="/create_post" exact component={Post} />,
-  <AuthorizedRoute
-    path="/firebase_messaging"
-    exact
-    component={FirebaseMessaging}
-  />,
-  <AuthorizedRoute
-    path="/firebase_storage"
-    exact
-    component={FirebaseStorage}
-  />,
+  <AuthorizedRoute path="/announcements" exact component={Notice} />,
+  <AuthorizedRoute path="/blog" exact component={Blog} />,
+  <AuthorizedRoute path="/blog/:uid" exact component={BlogArticle} />,
+  // <AuthorizedRoute path="/firebase_paths" exact component={FirebasePaths} />,
+  // <AuthorizedRoute path="/firebase_lists" exact component={FirebaseLists} />,
+  // <AuthorizedRoute path="/firebase_docs" exact component={FirebaseDocs} />,
+  // <AuthorizedRoute path="/firebase_cols" exact component={FirebaseCols} />,
+  // <AuthorizedRoute path="/admin" exact component={Admin} />,
+  // <AuthorizedRoute path="/companies" exact component={Companies} />,
+  // <AuthorizedRoute path="/companies/:uid" exact component={Company} />,
+  // <AuthorizedRoute path="/create_company" exact component={Company} />,
+  // <AuthorizedRoute path="/tasks" exact component={Tasks} />,
+  // <AuthorizedRoute path="/tasks/:uid" exact component={Task} />,
+  // <AuthorizedRoute path="/create_task" exact component={Task} />,
+  // <AuthorizedRoute path="/posts" exact component={Posts} />,
+  // <AuthorizedRoute path="/create_post" exact component={Post} />,
+  // <AuthorizedRoute
+  //   path="/firebase_messaging"
+  //   exact
+  //   component={FirebaseMessaging}
+  // />,
+  // <AuthorizedRoute
+  //   path="/firebase_storage"
+  //   exact
+  //   component={FirebaseStorage}
+  // />,
 ]
 
 export default routes

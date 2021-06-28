@@ -18,6 +18,8 @@ import {
   AccountBox as AccountBoxIcon,
   Dashboard as DashboardIcon,
   ExitToApp as ExitToAppIcon,
+  Announcement as AnnouncementIcon,
+  Archive,
   FormatTextdirectionRToL as RTLIcon,
   FormatTextdirectionLToR as LTRIcon,
   Language as LanguageIcon,
@@ -134,180 +136,198 @@ const getMenuItems = (props) => {
       leftIcon: <DashboardIcon />,
     },
     {
-      value: '/about',
-      visible: true,
-      primaryText: intl.formatMessage({ id: 'about', defaultMessage: 'About' }),
-      leftIcon: <InfoOutlined />,
-    },
-    {
-      value: '/chats',
+      value: '/announcements',
       visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: 'chats', defaultMessage: 'Chats' }),
-      leftIcon: <Chat />,
-    },
-    {
       primaryText: intl.formatMessage({
-        id: 'demos',
-        defaultMessage: 'Demos',
+        id: 'announcements',
+        defaultMessage: 'Announcement',
       }),
-      visible: isAuthorised,
-      primaryTogglesNestedList: true,
-      leftIcon: <Slideshow />,
-      nestedItems: [
-        {
-          value: '/admin',
-          visible: !isAdmin,
-          primaryText: intl.formatMessage({
-            id: 'admin',
-            defaultMessage: 'Admin',
-          }),
-          leftIcon: <Security />,
-        },
-        {
-          value: '/companies',
-          visible: isGranted(auth, 'read_companies'),
-          primaryText: intl.formatMessage({
-            id: 'companies',
-            defaultMessage: 'Companies',
-          }),
-          leftIcon: <Business />,
-        },
-        {
-          value: '/tasks',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'tasks',
-            defaultMessage: 'Tasks',
-          }),
-          leftIcon: <Assignment />,
-        },
-        {
-          value: '/posts',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'posts',
-            defaultMessage: 'Posts',
-          }),
-          leftIcon: <CallToAction />,
-        },
-      ],
+      leftIcon: <AnnouncementIcon />,
     },
     {
-      primaryText: intl.formatMessage({
-        id: 'documentation',
-        defaultMessage: 'Documentation',
-      }),
+      value: '/blog',
       visible: isAuthorised,
-      primaryTogglesNestedList: true,
-      leftIcon: <Assignment />,
-      nestedItems: [
-        {
-          value: '/docu/getting_started',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'getting_started',
-            defaultMessage: 'Getting started',
-          }),
-          leftIcon: <Assignment />,
-        },
-      ],
+      primaryText: intl.formatMessage({
+        id: 'blog',
+        defaultMessage: 'Blog',
+      }),
+      leftIcon: <Archive />,
     },
+    // {
+    //   value: '/about',
+    //   visible: true,
+    //   primaryText: intl.formatMessage({ id: 'about', defaultMessage: 'About' }),
+    //   leftIcon: <InfoOutlined />,
+    // },
+    // {
+    //   value: '/chats',
+    //   visible: isAuthorised,
+    //   primaryText: intl.formatMessage({ id: 'chats', defaultMessage: 'Chats' }),
+    //   leftIcon: <Chat />,
+    // },
+    // {
+    //   primaryText: intl.formatMessage({
+    //     id: 'demos',
+    //     defaultMessage: 'Demos',
+    //   }),
+    //   visible: isAuthorised,
+    //   primaryTogglesNestedList: true,
+    //   leftIcon: <Slideshow />,
+    //   nestedItems: [
+    //     {
+    //       value: '/admin',
+    //       visible: !isAdmin,
+    //       primaryText: intl.formatMessage({
+    //         id: 'admin',
+    //         defaultMessage: 'Admin',
+    //       }),
+    //       leftIcon: <Security />,
+    //     },
+    //     {
+    //       value: '/companies',
+    //       visible: isGranted(auth, 'read_companies'),
+    //       primaryText: intl.formatMessage({
+    //         id: 'companies',
+    //         defaultMessage: 'Companies',
+    //       }),
+    //       leftIcon: <Business />,
+    //     },
+    //     {
+    //       value: '/tasks',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'tasks',
+    //         defaultMessage: 'Tasks',
+    //       }),
+    //       leftIcon: <Assignment />,
+    //     },
+    //     {
+    //       value: '/posts',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'posts',
+    //         defaultMessage: 'Posts',
+    //       }),
+    //       leftIcon: <CallToAction />,
+    //     },
+    //   ],
+    // },
+    // {
+    //   primaryText: intl.formatMessage({
+    //     id: 'documentation',
+    //     defaultMessage: 'Documentation',
+    //   }),
+    //   visible: isAuthorised,
+    //   primaryTogglesNestedList: true,
+    //   leftIcon: <Assignment />,
+    //   nestedItems: [
+    //     {
+    //       value: '/docu/getting_started',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'getting_started',
+    //         defaultMessage: 'Getting started',
+    //       }),
+    //       leftIcon: <Assignment />,
+    //     },
+    //   ],
+    // },
 
-    {
-      primaryText: intl.formatMessage({
-        id: 'firebase',
-        defaultMessage: 'Firebase',
-      }),
-      visible: isAuthorised,
-      primaryTogglesNestedList: true,
-      leftIcon: <Whatshot />,
-      nestedItems: [
-        {
-          value: '/firebase_paths',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'firebase_paths',
-            defaultMessage: 'Paths',
-          }),
-          leftIcon: <Whatshot />,
-        },
-        {
-          value: '/firebase_lists',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'firebase_lists',
-            defaultMessage: 'Lists',
-          }),
-          leftIcon: <Whatshot />,
-        },
-        {
-          value: '/firebase_docs',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'firebase_docs',
-            defaultMessage: 'Docs',
-          }),
-          leftIcon: <Whatshot />,
-        },
-        {
-          value: '/firebase_cols',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'firebase_cols',
-            defaultMessage: 'Cols',
-          }),
-          leftIcon: <Whatshot />,
-        },
-        {
-          value: '/firebase_messaging',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'firebase_messaging',
-            defaultMessage: 'Messaging',
-          }),
-          leftIcon: <Whatshot />,
-        },
-        {
-          value: '/firebase_storage',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'firebase_storage',
-            defaultMessage: 'Storage',
-          }),
-          leftIcon: <Whatshot />,
-        },
-      ],
-    },
+    // {
+    //   primaryText: intl.formatMessage({
+    //     id: 'firebase',
+    //     defaultMessage: 'Firebase',
+    //   }),
+    //   visible: isAuthorised,
+    //   primaryTogglesNestedList: true,
+    //   leftIcon: <Whatshot />,
+    //   nestedItems: [
+    //     {
+    //       value: '/firebase_paths',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'firebase_paths',
+    //         defaultMessage: 'Paths',
+    //       }),
+    //       leftIcon: <Whatshot />,
+    //     },
+    //     {
+    //       value: '/firebase_lists',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'firebase_lists',
+    //         defaultMessage: 'Lists',
+    //       }),
+    //       leftIcon: <Whatshot />,
+    //     },
+    //     {
+    //       value: '/firebase_docs',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'firebase_docs',
+    //         defaultMessage: 'Docs',
+    //       }),
+    //       leftIcon: <Whatshot />,
+    //     },
+    //     {
+    //       value: '/firebase_cols',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'firebase_cols',
+    //         defaultMessage: 'Cols',
+    //       }),
+    //       leftIcon: <Whatshot />,
+    //     },
+    //     {
+    //       value: '/firebase_messaging',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'firebase_messaging',
+    //         defaultMessage: 'Messaging',
+    //       }),
+    //       leftIcon: <Whatshot />,
+    //     },
+    //     {
+    //       value: '/firebase_storage',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'firebase_storage',
+    //         defaultMessage: 'Storage',
+    //       }),
+    //       leftIcon: <Whatshot />,
+    //     },
+    //   ],
+    // },
 
-    {
-      primaryText: intl.formatMessage({
-        id: 'administration',
-        defaultMessage: 'Administration',
-      }),
-      primaryTogglesNestedList: true,
-      visible: isAdmin,
-      leftIcon: <Security />,
-      nestedItems: [
-        {
-          value: '/users',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'users',
-            defaultMessage: 'Users',
-          }),
-          leftIcon: <People />,
-        },
-        {
-          value: '/roles',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'roles',
-            defaultMessage: 'Roles',
-          }),
-          leftIcon: <AccountBoxIcon />,
-        },
-      ],
-    },
+    // {
+    //   primaryText: intl.formatMessage({
+    //     id: 'administration',
+    //     defaultMessage: 'Administration',
+    //   }),
+    //   primaryTogglesNestedList: true,
+    //   visible: isAdmin,
+    //   leftIcon: <Security />,
+    //   nestedItems: [
+    //     {
+    //       value: '/users',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'users',
+    //         defaultMessage: 'Users',
+    //       }),
+    //       leftIcon: <People />,
+    //     },
+    //     {
+    //       value: '/roles',
+    //       visible: isAuthorised,
+    //       primaryText: intl.formatMessage({
+    //         id: 'roles',
+    //         defaultMessage: 'Roles',
+    //       }),
+    //       leftIcon: <AccountBoxIcon />,
+    //     },
+    //   ],
+    // },
     { divider: true },
     {
       visible: true,
