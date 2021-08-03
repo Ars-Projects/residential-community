@@ -2,7 +2,6 @@ import React, { useState, lazy, Suspense } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { Helmet } from 'react-helmet'
-import Paper from '@material-ui/core/Paper'
 import { Scrollbars } from 'react-custom-scrollbars'
 import Toolbar from '@material-ui/core/Toolbar'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
@@ -107,7 +106,7 @@ const LandingPage = () => {
             setScrolled(true)
           }}
           autoHide
-          style={{ width: '100%', height: '100vh' }}
+          style={{ height: '100vh' }}
         > 
           <AppBar
             style={{
@@ -153,7 +152,6 @@ const LandingPage = () => {
               ref={(r) => r && setTop(r)}
               style={{
                 height: '100vh',
-                width: '100%',
                 backgroundColor: 'blue',
                 backgroundRepeat: 'no-repeat',
                 backgroundAttachment: 'fixed',
@@ -162,6 +160,8 @@ const LandingPage = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 minHeight: 600,
+                animation: 'shrinkeven 8s infinite alternate',
+                transition: 'all 300ms ease-in-out'
               }}
             >
 
@@ -212,27 +212,17 @@ const LandingPage = () => {
                 </div>
               </div>
             </div>
+            
             <div
               style={{
                 width: '100%',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginTop: -40,
               }}
             >
-              <Paper
-                elevation={3}
-                style={{
-                  width: '100%',
-                  maxWidth: '90%',
-                  borderRadius: 15,
-                  minHeight: 400,
-                  background:`url(${cardBg})`,
-                  backgroundRepeat: 'no-repeat',
-                  backgroundAttachment: 'fixed',
-                }}
-              >
+              
                 <div
                   style={{
                     width: '100%',
@@ -261,12 +251,14 @@ const LandingPage = () => {
                 </div>
                 {scrolled && (
                   <Suspense fallback={<CircularProgress />}>
+                    
                       <PageContent setComponents={setComponents} />
+                    
                   </Suspense>
                 )}
-              </Paper>
             </div>
-            <div style={{ height: 200 }}></div>
+            
+            
             {scrolled && (
               <Suspense fallback={<CircularProgress />}>
                 <Footer />

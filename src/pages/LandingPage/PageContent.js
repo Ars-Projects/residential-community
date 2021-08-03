@@ -14,13 +14,16 @@ import {
   withStyles,
   lighten,
   darken } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
 import positivity from "./positivity.jpg";
 import amenities from "./amenities.jpg";
 import openspace from "./openspace1.jpg";
 import allAmenities from "./amenities.png"
 import CardMedia from '@material-ui/core/CardMedia';
 import {Flip, Slide, Roll} from 'react-reveal';
-import cardBg from "./Aboutus1.jpg"
+import cardBg from "./Aboutus1.jpg";
+import CarouselComponent from './CarouselComponent';
+
 
   const LightTooltip = withStyles((theme) => {
   const getBackgroundColor = theme.palette.type === 'light' ? lighten : darken;
@@ -124,214 +127,242 @@ const PackageCard = ({ title, command, description, icons, image }) => {
 const PageContent = ({ setComponents }) => {
   return (
     <React.Fragment>
-      <div style={{ height: 10 }} />
 
-      <Flip left>
-      <Typography
-        variant="h3"
-        //color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
-      >
-        Our Motto
-      </Typography>
-      </Flip>
-      <Roll right>
-      <Typography
-        variant="h5"
-        component="div"
-        color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
-      >
-Strive to make you feel home where we all belong, connect, share knowledge, encourage talent and be more together, everyday!
-      </Typography>
-      </Roll>
-
-      <Flip right>
-      <Typography
-        variant="h3"
-        //color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
-      >
-        We offer
-      </Typography>
-      </Flip>
-
-      <div style={{ height: 10 }} />
-
-      <div
+      <Paper
+        elevation={3}
         style={{
           width: '100%',
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'space-around',
-          flexWrap: 'wrap',
+          margin: '2% 0',
+          maxWidth: '90%',
+          borderRadius: 15,
+          minHeight: '60vh',
+          background:`url(${cardBg})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
         }}
       >
-        <Slide right>
-        <PackageCard
-          title={'Positive Environment'}
-          command={'npx create-react-app my-app --template base'}
-          description={
-            'Positive and nurturing environment Warm, lively & caring neighborhood'
-          }
-          image={positivity}
-          icons={
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-around',
-              }}
-            >
-              <img
-                src="react.png"
-                alt="react"
-                style={{ width: 50, aspectRatio: 1.11 }}
-              />
-            </div>
-          }
-        />
-        </Slide>
-        <Slide bottom>
-        <PackageCard
-          title={'Green and Open Spaces'}
-          command={'npx create-react-app my-app --template material-ui'}
-          description={
-            'Lush green open spaces Dedicated recreational areas for kids and elderly'
-          }
-          image={openspace}
-          icons={
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-around',
-              }}
-            >
-              <img
-                src="react.png"
-                alt="react"
-                style={{ width: 50, aspectRatio: 1.11 }}
-              />
-              <img src="material-ui.png" alt="react" style={{ width: 50 }} />
-            </div>
-          }
-        />
-        </Slide>
+      
+        <CarouselComponent />
+        
+      </Paper>
 
-        <Slide left>
-        <PackageCard
-          title={'Life enhancing amenities'}
-          command={'npx create-react-app my-app --template rmw'}
-          description={'Life enhancing amenities to make your stay enjoyable. Well-equipped for day-to-day grocery, grooming & health needs'}
-          image={amenities}
-          icons={
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-around',
-              }}
-            >
-              <img
-                src="react.png"
-                alt="react"
-                style={{ width: 50, aspectRatio: 1.11 }}
-              />
-              <img src="material-ui.png" alt="react" style={{ width: 50 }} />
-              <img src="firebase.png" alt="react" style={{ width: 50 }} />
-            </div>
-          }
-        />
-        </Slide>
-      </div>
-      <div style={{ height: 30 }} />
-      <div
-        ref={(r) => {
-          if (r) {
-            setComponents(r)
-          }
-        }}
+      <Paper
+        elevation={3}
         style={{
-          //height: 400,
-          backgroundColor: '#2D2D2D',
-          backgroundImage: `url(${cardBg})`,
+          width: '100%',
+          margin: '2% 0',
+          maxWidth: '90%',
+          borderRadius: 15,
+          minHeight: '60vh',
+          background:`url(${cardBg})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
         }}
       >
-        <div style={{ height: 30 }} />
-        <Slide bottom>
-        <Typography
-          variant="h3"
-          //color="textSecondary"
-          style={{ margin: 16, textAlign: 'center', color: 'black' }}
-        >
-          About Us
-        </Typography>
-        </Slide>
-        {/* <Typography
-          variant="h5"
-          component="div"
-          style={{ margin: 16, textAlign: 'center', color: 'grey' }}
-        >
-          But also not a framework.
-        </Typography> */}
+        <Flip right>
+          <Typography
+            variant="h3"
+            //color="textSecondary"
+            style={{ margin: 16, textAlign: 'center' }}
+          >
+            We offer
+          </Typography>
+        </Flip>
         <div
           style={{
             width: '100%',
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'space-around',
+            alignItems: 'space-around',
+            flexWrap: 'wrap',
           }}
         >
-          <TrackChanges style={{ fontSize: 150, color: 'white' }} />
+          <Slide right>
+            <PackageCard
+              title={'Positive Environment'}
+              command={'npx create-react-app my-app --template base'}
+              description={
+                'Positive and nurturing environment Warm, lively & caring neighborhood'
+              }
+              image={positivity}
+              icons={
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                  }}
+                >
+                  <img
+                    src="react.png"
+                    alt="react"
+                    style={{ width: 50, aspectRatio: 1.11 }}
+                  />
+                </div>
+              }
+            />
+          </Slide>
+
+          <Slide bottom>
+            <PackageCard
+              title={'Green and Open Spaces'}
+              command={'npx create-react-app my-app --template material-ui'}
+              description={
+                'Lush green open spaces Dedicated recreational areas for kids and elderly'
+              }
+              image={openspace}
+              icons={
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                  }}
+                >
+                  <img
+                    src="react.png"
+                    alt="react"
+                    style={{ width: 50, aspectRatio: 1.11 }}
+                  />
+                  <img src="material-ui.png" alt="react" style={{ width: 50 }} />
+                </div>
+              }
+            />
+          </Slide>
+
+          <Slide left>
+            <PackageCard
+              title={'Life enhancing amenities'}
+              command={'npx create-react-app my-app --template rmw'}
+              description={'Life enhancing amenities to make your stay enjoyable. Well-equipped for day-to-day grocery, grooming & health needs'}
+              image={amenities}
+              icons={
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                  }}
+                >
+                  <img
+                    src="react.png"
+                    alt="react"
+                    style={{ width: 50, aspectRatio: 1.11 }}
+                  />
+                  <img src="material-ui.png" alt="react" style={{ width: 50 }} />
+                  <img src="firebase.png" alt="react" style={{ width: 50 }} />
+                </div>
+              }
+            />
+          </Slide>
+
         </div>
-        <Flip left>
-        <Typography
-          variant="h5"
-          component="div"
-          style={{ margin: 16, textAlign: 'center', color: 'grey' }}
-        >
-          Designed for comfort thoughtfully and immaculately, located in Electronic City, Phase 1, Bangalore, Prestige Sunrise Park (PSP) offers a choice of tastefully designed apartments for you and your family. 
-Prestige Sunrise Park is the location of 2 Blocks – Birchwood and Norwood, home to 1910 apartments of many stages, offering a simple and splendor lifestyle with ample space, natural lighting, and stunning finishes.
-Through the environmental-friendly concepts of New Urbanism, PSP offers need a line or two on solar panels, WTP, smart lights in common areas and other such environment focused facilities
 
-        </Typography>
-        </Flip>
-        <div style={{ height: 50 }} />
-      </div>
+      </Paper>
 
-      <div style={{ height: 30 }} />
-      <Typography
-        variant="h3"
-        //color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
-      >
-        Amenities offered
-      </Typography>
-      {/* <Typography
-        variant="h5"
-        component="div"
-        color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
-      >
-        Every template is a collection of very carefully picked packages and
-        projects. Only the creme de la creme of the react ecosystem
-      </Typography> */}
-      <div style={{ height: 30 }} />
-      <div
+      
+      <Paper
+        elevation={3}
         style={{
           width: '100%',
-          display: 'flex',
-          justifyContent: 'space-around',
-          flexWrap: 'wrap',
+          margin: '2% 0',
+          maxWidth: '90%',
+          borderRadius: 15,
+          minHeight: '60vh',
+          background:`url(${cardBg})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
         }}
       >
-        <img src={allAmenities} alt="react" style={{ width: 750 }} />
-        {/* <img src="material-ui.png" alt="react" style={{ width: 150 }} />
-        <img src="firebase.png" alt="react" style={{ width: 150 }} /> */}
-      </div>
-      <div style={{ height: 50 }} />
+        <div
+          ref={(r) => {
+            if (r) {
+              setComponents(r)
+            }
+          }}
+          style={{
+            //height: 400,
+            backgroundColor: '#2D2D2D',
+            backgroundImage: `url(${cardBg})`,
+          }}
+        >
+
+          <Slide bottom>
+            <Typography
+              variant="h3"
+              //color="textSecondary"
+              style={{ margin: 16, textAlign: 'center', color: 'black' }}
+            >
+              About Us
+            </Typography>
+          </Slide>
+
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <TrackChanges style={{ fontSize: 150, color: 'white' }} />
+          </div>
+
+          <Flip left>
+            <Typography
+              variant="h5"
+              component="div"
+              style={{ margin: 16, textAlign: 'center', color: 'grey' }}
+            >
+              Designed for comfort thoughtfully and immaculately, located in Electronic City, Phase 1, Bangalore, Prestige Sunrise Park (PSP) offers a choice of tastefully designed apartments for you and your family. 
+              Prestige Sunrise Park is the location of 2 Blocks – Birchwood and Norwood, home to 1910 apartments of many stages, offering a simple and splendor lifestyle with ample space, natural lighting, and stunning finishes.
+              Through the environmental-friendly concepts of New Urbanism, PSP offers need a line or two on solar panels, WTP, smart lights in common areas and other such environment focused facilities
+
+            </Typography>
+          </Flip>
+
+        </div>
+
+      </Paper>
+      
+      
+      <Paper
+        elevation={3}
+        style={{
+          width: '100%',
+          margin: '2% 0',
+          maxWidth: '90%',
+          borderRadius: 15,
+          minHeight: '60vh',
+          background:`url(${cardBg})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        
+
+        <Typography
+          variant="h3"
+          //color="textSecondary"
+          style={{ margin: 16, textAlign: 'center' }}
+        >
+          Amenities offered
+        </Typography>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'space-around',
+            flexWrap: 'wrap',
+          }}
+        >
+          <img src={allAmenities} alt="react" style={{ height: '90%' }} />
+        </div>
+      </Paper>
+      
+      
+
     </React.Fragment>
   )
 }
 
-export default PageContent
+export default PageContent;

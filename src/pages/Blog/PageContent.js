@@ -17,10 +17,6 @@ import {
   darken } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/core/styles';
 import CardActions from '@material-ui/core/CardActions';
-// import positivity from "./positivity.jpg";
-// import amenities from "./amenities.jpg";
-// import openspace from "./openspace1.jpg";
-// import allAmenities from "./amenities.png"
 import CardMedia from '@material-ui/core/CardMedia';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import Swiper core and required modules
@@ -38,17 +34,18 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 
 SwiperCore.use([Navigation, Pagination, SwipweScroll, A11y]);
 
-  const LightTooltip = withStyles((theme) => {
+const LightTooltip = withStyles((theme) => {
   const getBackgroundColor = theme.palette.type === 'light' ? lighten : darken;
   return {
-tooltip: {
-  ...theme.typography.body2,
-  borderRadius: theme.shape.borderRadius,
-  display: 'flex',
-  padding: '6px 10px',
-  backgroundColor: getBackgroundColor(theme.palette.success.main, 0.1),
-}
-}})(Tooltip);
+    tooltip: {
+      ...theme.typography.body2,
+      borderRadius: theme.shape.borderRadius,
+      display: 'flex',
+      padding: '6px 10px',
+      backgroundColor: getBackgroundColor(theme.palette.success.main, 0.1),
+    }
+  }
+})(Tooltip);
 
 
 const PageContent = ({ item }) => {
@@ -86,9 +83,6 @@ const PageContent = ({ item }) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {/* <Button size="small" color="primary">
-            Share
-          </Button> */}
           <Button size="small" color="primary" variant="contained" 
           // eslint-disable-next-line no-restricted-globals
           onClick={ ()=> {history.push(`/blog/${item.slno}`);}}>
@@ -99,110 +93,46 @@ const PageContent = ({ item }) => {
     );
   }
   
-try{
-  return (
-    <React.Fragment>
-      <div style={{ height: 50 }} />
-      <Slide top>
-      <Typography
-        variant="h3"
-        //color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
-      >
-        {item?item[0].Category:""}
-      </Typography>
-      </Slide>
-      {/* <div
-                  style={{
-                    width: '100%',
-                    // display: 'flex',
-                    // justifyContent: 'center',
-                    marginTop: 50,
-                    
-                  }}
-                >
-
-                  <h3
-                    style={{
-                      color: 'Orange',
-                      textAlign: 'center',
-                      fontWeight: 'bold',
-                      fontSize: 50,
-                    }}
-                  >
-                    Health:
-                  </h3>
-                 </div> */}
+  try {
+    return (
+      <React.Fragment>
+        <Slide top>
+          <Typography
+            variant="h3"
+            style={{ margin: 16, textAlign: 'center' }}
+          >
+            {item?item[0].Category:""}
+          </Typography>
+        </Slide>
+        <div
+          style={{
+            borderLeft: '10%',
+            width: '100%',
+          }}>
+          <Slide bottom>
+            <Swiper
+              spaceBetween={5}
+              slidesPerView={3}
+              navigation
+              pagination={{ clickable: true }}
+              scrollbar={{ draggable: true }}
+              onSlideChange={() => console.log('slide change')}
+              onSwiper={(swiper) => console.log(swiper)}
+            >
+              {item.map(blog => (
+                <SwiperSlide key={blog.slno}> 
+                <MediaCard item={blog}/> 
+                  </SwiperSlide>
                 
-                <div
-                style={{
-                  borderLeft: '10%',
-                  width: '100%',
-                  // display: 'flex',
-                  // justifyContent: 'center',
-                  // marginTop: 50,
-                }}>
-                  <Slide bottom>
-                    <Swiper
-                    // height={50}
-                    spaceBetween={5}
-                    slidesPerView={3}
-                    navigation
-                    pagination={{ clickable: true }}
-                    scrollbar={{ draggable: true }}
-                    onSlideChange={() => console.log('slide change')}
-                    onSwiper={(swiper) => console.log(swiper)}
-                    // effect="fade"
-                  >
-                    
-                      
-                        {item.map(blog => (
-                          <SwiperSlide key={blog.slno}> 
-                          <MediaCard item={blog}/> 
-                            </SwiperSlide>
-                          
-                        ))} 
-                    
-                    {/* <SwiperSlide>Slide 1</SwiperSlide>
-                    <SwiperSlide>Slide 2</SwiperSlide>
-                    <SwiperSlide>Slide 3</SwiperSlide>
-                    <SwiperSlide>Slide 4</SwiperSlide> */}
-                    
-                  </Swiper>
-                  </Slide>
-                </div>
-      
-      <div style={{ height: 30 }} />
-      
-
-      {/* <div style={{ height: 30 }} />
-      <Typography
-        variant="h3"
-        //color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
-      >
-        Amenities offered
-      </Typography>
-     */}
-      <div style={{ height: 30 }} />
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-around',
-          flexWrap: 'wrap',
-        }}
-      >
-        {/* <img src={allAmenities} alt="react" style={{ width: 750 }} /> */}
-        {/* <img src="material-ui.png" alt="react" style={{ width: 150 }} />
-        <img src="firebase.png" alt="react" style={{ width: 150 }} /> */}
-      </div>
-      <div style={{ height: 50 }} />
-    </React.Fragment>
-  )
-      }catch(error){
-        return <h1>Caught an error.</h1>
-      }
+              ))} 
+            </Swiper>
+          </Slide>
+        </div>
+      </React.Fragment>
+    )
+  } catch (error) {
+    return <h1>Caught an error.</h1>
+  }
 }
 
 export default PageContent
