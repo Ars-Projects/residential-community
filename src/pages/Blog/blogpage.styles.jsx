@@ -3,10 +3,9 @@ import CustomButton from '../../components/custom-button/custom-button.component
 
 
 export const CollectionPageContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  height: 1550px;
   align-items: center;
   position: relative;
   background-color: #EBEBEB;
@@ -22,14 +21,12 @@ export const CollectionPageContainer = styled.div`
 `;
 
 export const CollectionBlogContainer = styled.div`
-width: 50vw;
+width: 50%;
 `;
 
 export const TableItemsContainer = styled.div`
-  width: 50vw
   display: flex;
   flex-direction: column;
-  height: 550px;
   align-items: center;
   position: relative;
 
@@ -37,7 +34,6 @@ export const TableItemsContainer = styled.div`
 
 export const BackgroundImage = styled.div`
   width: 100%;
-  height: 95%;
   background-size: cover;
   background-position: center;
   margin-bottom: 5px;
@@ -54,12 +50,11 @@ export const CollectionFooterContainer = styled.div`
 
 
 export const CollectionItemContainer = styled.div`
-  width: 17vw;
+  width: 17%;
   display: flex;
   -webkit-box-shadow: 5px 6px 15px 5px rgba(0,0,0,0.37); 
   box-shadow: 5px 6px 15px 5px rgba(0,0,0,0.37);
   flex-direction: column;
-  height: 250px;
   align-items: center;
   position: relative;
   &:hover {

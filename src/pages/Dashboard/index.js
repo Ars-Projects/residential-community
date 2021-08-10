@@ -37,32 +37,12 @@ import {Zoom, Fade, Roll, Slide} from 'react-reveal';
 
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
-// import Table from "components/Table/Table.js";
-// import Tasks from "components/Tasks/Tasks.js";
-// import CustomTabs from "components/CustomTabs/CustomTabs.js";
-// import Danger from "components/Typography/Danger.js";
-// import Card from "../../components/Card/Card.js";
+
 import CardHeader from "../../components/Card/CardHeader.js";
-// import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 
-// const ReportContainer = ({ children }) => {
-//   return (
-//     <div
-//       style={{
-//         minWidth: 300,
-//         margin: 8,
-//         flex: 0.45,
-//         height: '100%',
-//       }}
-//     >
-//       <Card>
-//         <CardContent>{children}</CardContent>
-//       </Card>
-//     </div>
-//   )
-// }
+
 const useStyles = makeStyles(styles);
 
 
@@ -217,126 +197,108 @@ let domInitData = [{slno:'1',Date:'',HelperName:'',Role:'',StartDate:'',EndDate:
           height: '100%',
         }}
       >
-      <Covid19PageContainer>
-      {/* <Zoom top> */}
-      <BackgroundImage className='image' imageUrl={imageCovid} />
-      {/* </Zoom> */}
-
-        {/* <Covid19CardContainer> */}
-        {/* <div className={styles.container} src={imageCovid}> */}
-        <Box m={4}>
-      <Zoom bottom>
-        <Grid container direction={'column'} spacing={24}>
-          <CovidCards data={data}/>
-        </Grid>
-      </Zoom>
-        </Box>
-        {/* </div> */}
-      {/* </Covid19CardContainer>
-      <Covid19GraphContainer> */}
-      <div>
-      <Box m={4}>
-      <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <Slide right>
-                <Card chart>
-                  <CardHeader color="success">
-                    < PeopleLineGraph/>
-                  </CardHeader>
-                  <CardBody>
-                    <h4 className={classes.cardTitle}>People Daily Infected, Recovered and Active cases</h4>
-                  </CardBody>
-                  <CardFooter chart>
-                    <div className={classes.stats}>
-                      <AccessTime /> updated 4 minutes ago
-                    </div>
-                  </CardFooter>
+        <Covid19PageContainer>
+          <Box m={4} style={{
+            width: '95%'
+          }}>
+            <CovidCards data={data}/>
+          </Box>
+          <Box m={4} style={{
+            width: '95%'
+          }}>
+            <Grid container spacing={2} justify="center">
+                <Grid item xs={12} sm={12} md={4}>
+                  <Slide right>
+                    <Card chart>
+                      <CardHeader color="success">
+                        < PeopleLineGraph/>
+                      </CardHeader>
+                      <CardBody>
+                        <h4 className={classes.cardTitle}>People Daily Infected, Recovered and Active cases</h4>
+                      </CardBody>
+                      <CardFooter chart>
+                        <div className={classes.stats}>
+                          <AccessTime /> updated 4 minutes ago
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  </Slide>
+                </Grid>
+                <Grid item xs={12} sm={12} md={4}>
+                  <Slide bottom>
+                    <Card chart>
+                      <CardHeader color="warning">
+                        <FlatsLineGraph/>
+                      </CardHeader>
+                      <CardBody>
+                        <h4 className={classes.cardTitle}>Flat Infection</h4>
+                      </CardBody>
+                      <CardFooter chart>
+                        <div className={classes.stats}>
+                          <AccessTime /> updated 4 minutes ago
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  </Slide>
+                </Grid>
+                <Grid item xs={12} sm={12} md={4}>
+                  <Slide left>
+                    <Card chart>
+                      <CardHeader color="info">
+                        <DomHelperPieChart/>
+                      </CardHeader>
+                      <CardBody>
+                        <h4 className={classes.cardTitle}>Domestic helpers Blocked</h4>
+                      </CardBody>
+                      <CardFooter chart>
+                        <div className={classes.stats}>
+                          <AccessTime /> updated 4 minutes ago
+                        </div>
+                      </CardFooter>
+                    </Card>
+                </Slide>
+                </Grid>
+            </Grid>
+          </Box>
+          <Box m={4} style={{
+            width: '95%'
+          }}>
+            <Grid container spacing={2} xs={12} justify="center">
+              <Grid item md={6} sm={12} xs={12}>
+                <Card>
+                  <Slide top>
+                    <CardHeader color="warning">
+                      <h4 className={classes.cardTitleWhite}>Flats Stats</h4>
+                      <p className={classes.cardCategoryWhite}>
+                        Flats and People Quarantine Data
+                      </p>
+                    </CardHeader>
+                    <CardBody>
+                      <FlatsTable flatTableData={flatTableData}/>
+                    </CardBody>
+                  </Slide>
                 </Card>
-            </Slide>
+              </Grid>
 
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <Slide bottom>
-              <Card chart>
-                <CardHeader color="warning">
-                  <FlatsLineGraph/>
-                </CardHeader>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Flat Infection</h4>
-                </CardBody>
-                <CardFooter chart>
-                  <div className={classes.stats}>
-                    <AccessTime /> updated 4 minutes ago
-                  </div>
-                </CardFooter>
-              </Card>
-            </Slide>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <Slide left>
-
-            <Card chart>
-              <CardHeader color="info">
-                {/* <ChartistGraph
-                  className="ct-chart"
-                  data={completedTasksChart.data}
-                  type="Line"
-                  options={completedTasksChart.options}
-                  listener={completedTasksChart.animation}
-                /> */}
-                <DomHelperPieChart/>
-              </CardHeader>
-              <CardBody>
-                <h4 className={classes.cardTitle}>Domestic helpers Blocked</h4>
-                {/* <p className={classes.cardCategory}>Last Campaign Performance</p> */}
-              </CardBody>
-              <CardFooter chart>
-                <div className={classes.stats}>
-                  <AccessTime /> updated 4 minutes ago
-                </div>
-              </CardFooter>
-            </Card>
-          </Slide>
-          </GridItem>
-      </GridContainer>
-      </Box>
-      <Box m={4}>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
-          <Slide top>
-            <Card>
-              <CardHeader color="warning">
-                <h4 className={classes.cardTitleWhite}>Flats Stats</h4>
-                <p className={classes.cardCategoryWhite}>
-                  Flats and People Quarantine Data
-                </p>
-              </CardHeader>
-              <CardBody>
-                <FlatsTable flatTableData={flatTableData}/>
-              </CardBody>
-            </Card>
-          </Slide>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
-          <Slide bottom>
-            <Card>
-              <CardHeader color="warning">
-                <h4 className={classes.cardTitleWhite}>Domestic Helper Stats</h4>
-                <p className={classes.cardCategoryWhite}>
-                  Domestic Helpers blocked details 
-                </p>
-              </CardHeader>
-              <CardBody>
-                <DomHelperTable domTableData={domTableData}/>
-              </CardBody>
-            </Card>
-          </Slide>
-          </GridItem>
-      </GridContainer>
-      </Box>
-      </div>
-    </Covid19PageContainer> 
-    </Scrollbar>
+              <Grid item md={6} sm={12} xs={12}>
+                <Card>
+                  <Slide bottom>
+                    <CardHeader color="warning">
+                      <h4 className={classes.cardTitleWhite}>Domestic Helper Stats</h4>
+                      <p className={classes.cardCategoryWhite}>
+                        Domestic Helpers blocked details 
+                      </p>
+                    </CardHeader>
+                    <CardBody>
+                      <DomHelperTable domTableData={domTableData}/>
+                    </CardBody>
+                  </Slide>
+                </Card>
+              </Grid>
+            </Grid>
+          </Box>
+        </Covid19PageContainer> 
+      </Scrollbar>
     </Page>
   )
 }

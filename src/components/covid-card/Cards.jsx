@@ -12,7 +12,6 @@ const CovidCards = ({ data: { confirmed, recovered, quarantine, domesticHelpersD
       return 'Loading...';
     }
     return(
-        <div className={styles.container}>
             <Grid container spacing={5} justify="center">
                 <Grid item xs={12} md={2} component={Card} className={cx(styles.card, styles.infected)}>
                     <CardContent>
@@ -55,7 +54,6 @@ const CovidCards = ({ data: { confirmed, recovered, quarantine, domesticHelpersD
                     </CardContent>
                 </Grid>
             </Grid>
-        </div>
     )
 }
 

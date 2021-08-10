@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const Covid19PageContainer = styled.div`
-width: 100vw;
+export const Covid19PageContainer = styled.div `
+width: 100%;
+height: 100%;
 display: flex;
 flex-direction: column;
-height: 2000px;
 align-items: center;
 position: relative;
 background-color: #EBEBEB;
@@ -20,8 +20,8 @@ background-color: #EBEBEB;
 `;
 
 
-export const Covid19CardContainer = styled.div`
-width: 100vw;
+export const Covid19CardContainer = styled.div `
+width: 100%;
 display: flex;
 flex-direction: column;
 height: 200px;
@@ -41,8 +41,8 @@ background-color: #EBEBEB;
 }
 `;
 
-export const Covid19GraphContainer = styled.div`
-width: 100vw;
+export const Covid19GraphContainer = styled.div `
+width: 100%;
 display: flex;
 flex-direction: column;
 height: 200px;
@@ -62,8 +62,8 @@ background-color: #EBEBEB;
 }
 `;
 
-export const Covid19TableContainer = styled.div`
-width: 100vw;
+export const Covid19TableContainer = styled.div `
+width: 100%;
 display: flex;
 flex-direction: column;
 height: 200px;
@@ -83,11 +83,15 @@ background-color: #EBEBEB;
 }
 `;
 
-export const BackgroundImage = styled.div`
+export const BackgroundImage = styled.div `
   width: 100%;
   height: 35%;
   background-size: cover;
   background-position: center;
   margin-bottom: 5px;
-  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+  background-image: ${({ imageUrl }) => `
+url($ {
+  imageUrl
+})
+`};
   `;

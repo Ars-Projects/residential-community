@@ -15,16 +15,12 @@ import {
     TablePagination,
     TableFooter
  } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
     table: {
-      minWidth: 650,
     },
-    tableContainer: {
-        borderRadius: 15,
-        margin: '10px 10px',
-        maxWidth: 950
-    },
+    tableContainer: {},
     tableHeaderCell: {
         fontWeight: 'bold',
         backgroundColor: theme.palette.primary.dark,
@@ -46,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 8,
         padding: '3px 10px',
         display: 'inline-block'
+    },
+    actions : {
+      display: 'flex'
     }
   }));
 
@@ -79,6 +78,7 @@ export default function ({flatTableData}) {
   };
 
   return (
+    <React.Fragment>
     <TableContainer component={Paper} className={classes.tableContainer}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -149,8 +149,16 @@ export default function ({flatTableData}) {
             </TableRow>
           ))}
         </TableBody>
-        <TableFooter>
+        
+      </Table>
+      
+    </TableContainer>
+    <TableFooter>
+      <TableRow>
         <TablePagination
+            classes={{
+              actions: classes.actions
+            }}
             rowsPerPageOptions={[5, 10, 15]}
             component="div"
             count={flatTableData.length}
@@ -159,9 +167,10 @@ export default function ({flatTableData}) {
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-        </TableFooter>
-      </Table>
-    </TableContainer>
+      </TableRow>
+    </TableFooter>
+
+    </React.Fragment>
   );
 }
 

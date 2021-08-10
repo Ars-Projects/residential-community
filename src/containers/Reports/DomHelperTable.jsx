@@ -19,12 +19,9 @@ import {
 
 const useStyles = makeStyles((theme) => ({
     table: {
-      minWidth: 650,
     },
     tableContainer: {
         borderRadius: 15,
-        margin: '10px 10px',
-        maxWidth: 950
     },
     tableHeaderCell: {
         fontWeight: 'bold',
@@ -47,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 8,
         padding: '3px 10px',
         display: 'inline-block'
+    },
+    actions: {
+      display: 'flex'
     }
   }));
 
@@ -80,51 +80,56 @@ export default function ({domTableData}) {
   };
 
   return (
-    <TableContainer component={Paper} className={classes.tableContainer}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell className={classes.tableHeaderCell}>Sl no</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Date</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Helper Name</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Role</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Start Date</TableCell>
-            <TableCell className={classes.tableHeaderCell}>End Date</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Blocked Status</TableCell>
-            <TableCell className={classes.tableHeaderCell}></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {domTableData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-            <TableRow key={row.slno}>
-              <TableCell>
-                  <Grid container>
-                      <Grid item lg={1}>
-                          <Avatar alt={row.slno} src='.' className={classes.avatar}/>
-                      </Grid>
-                  </Grid>
-              </TableCell>
-              <TableCell>
-                  <Typography color="primary" variant="subtitle2">{row.Date}</Typography>
-                </TableCell>
-              <TableCell> <Typography className={classes.name}>{row.HelperName}</Typography></TableCell>
-              <TableCell>
-                  <Typography color="primary" variant="subtitle2">{row.Role}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography color="primary" variant="subtitle2">{row.StartDate}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography color="primary" variant="subtitle2">{row.EndDate}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography color="primary" variant="subtitle2">{row.BlockedStatus}</Typography>
-                </TableCell>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.tableContainer}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell className={classes.tableHeaderCell}>Sl no</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Date</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Helper Name</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Role</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Start Date</TableCell>
+              <TableCell className={classes.tableHeaderCell}>End Date</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Blocked Status</TableCell>
+              <TableCell className={classes.tableHeaderCell}></TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-        <TablePagination
+          </TableHead>
+          <TableBody>
+            {domTableData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+              <TableRow key={row.slno}>
+                <TableCell>
+                    <Grid container>
+                        <Grid item lg={1}>
+                            <Avatar alt={row.slno} src='.' className={classes.avatar}/>
+                        </Grid>
+                    </Grid>
+                </TableCell>
+                <TableCell>
+                    <Typography color="primary" variant="subtitle2">{row.Date}</Typography>
+                  </TableCell>
+                <TableCell> <Typography className={classes.name}>{row.HelperName}</Typography></TableCell>
+                <TableCell>
+                    <Typography color="primary" variant="subtitle2">{row.Role}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography color="primary" variant="subtitle2">{row.StartDate}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography color="primary" variant="subtitle2">{row.EndDate}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography color="primary" variant="subtitle2">{row.BlockedStatus}</Typography>
+                  </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          
+        </Table>
+      </TableContainer>
+      <TableFooter>
+        <TableRow>
+          <TablePagination
             rowsPerPageOptions={[5, 10, 15]}
             component="div"
             count={domTableData.length}
@@ -132,10 +137,13 @@ export default function ({domTableData}) {
             page={page}
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-        </TableFooter>
-      </Table>
-    </TableContainer>
+            classes= {{
+              actions: classes.actions
+            }}
+          />
+        </TableRow>
+      </TableFooter>
+    </React.Fragment>
   );
 }
 
