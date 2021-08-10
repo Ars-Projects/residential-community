@@ -173,15 +173,7 @@ const LandingPage = () => {
                   flexDirection: 'column',
                 }}
               >
-                {/* <img
-                  src={'./homepage.jpg'}
-                  style={{ height: 150, maxWidth: 280, justifySelf: 'center' }}
-                /> */}
-                {/* <img
-                  src={'/rmw.svg'}
-                  alt="logo"
-                  style={{ height: 150, maxWidth: 280, justifySelf: 'center' }}
-                /> */}
+                
 
                 <div style={{ padding: 8 }}>
                 <Roll right>

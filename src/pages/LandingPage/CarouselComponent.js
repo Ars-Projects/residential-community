@@ -41,12 +41,12 @@ const CarouselComponent = (props) =>
     return (
         <Carousel
             className="Example"
-            autoPlay={false}
+            autoPlay={true}
             animation="slide"
             indicators={true}
             timeout={1000}
             cycleNavigation={true}
-            navButtonsAlwaysVisible={false}
+            navButtonsAlwaysVisible={true}
             navButtonsAlwaysInvisible={false}
             next={(now, previous) => console.log(`Next User Callback: Now displaying child${now}. Previously displayed child${previous}`)}
             prev={(now, previous) => console.log(`Prev User Callback: Now displaying child${now}. Previously displayed child${previous}`)}
@@ -67,32 +67,31 @@ function Item(props)
             justifyContent: "center",
             alignItems: "center",
             justifyItems: "center",
-            flexDirection: "column"
+            flexDirection: "row",
+            width: '90%',
+            margin: 'auto',
+            height: '70vh'
             
         }}>
-        <div style={{display: 'flex', flexDirection:'column'}}>  
-        <Flip left>
-            <Typography
-              variant="h3"
-              //color="textSecondary"
-              style={{ margin: 16, textAlign: 'center' }}
-            >
-              Our Motto
-            </Typography>
-          </Flip>
-  
-          <Roll right>
-            <Typography
-              variant="h5"
-              component="div"
-              color="textSecondary"
-              style={{ margin: 16, textAlign: 'center' }}
-            >
-              Strive to make you feel home where we all belong, connect, share knowledge, encourage talent and be more together, everyday!
-            </Typography>
-          </Roll>
-          </div>
-            <Card elevation={4} style={{ margin: 18, maxWidth: 350 }}>
+            <div style={{display: 'flex', flexDirection:'column', width: '60%'}}>  
+                <Typography
+                    variant="h3"
+                    //color="textSecondary"
+                    style={{ margin: 16, textAlign: 'center' }}
+                >
+                    Our Motto
+                </Typography>
+
+                <Typography
+                    variant="h5"
+                    component="div"
+                    color="textSecondary"
+                    style={{ margin: 16, textAlign: 'center' }}
+                >
+                    Designed for comfort thoughtfully and immaculately, located in Electronic City, Phase 1, Bangalore, Prestige Sunrise Park (PSP) offers a choice of tastefully designed apartments for you and your family. Prestige Sunrise Park is the location of 2 Blocks – Birchwood and Norwood, home to 1910 apartments of many stages, offering a simple and splendor lifestyle with ample space, natural lighting, and stunning finishes. Through the environmental-friendly concepts of New Urbanism, PSP offers need a line or two on solar panels, WTP, smart lights in common areas and other such environment focused facilities
+                </Typography>
+            </div>
+            <Card elevation={4} style={{ margin: 18, width: '40%' }}>
                 <CardContent style={{
                     color: "#fff",
                     background: `url(${props.item.imgPath})`

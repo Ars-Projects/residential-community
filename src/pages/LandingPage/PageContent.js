@@ -23,6 +23,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import {Flip, Slide, Roll} from 'react-reveal';
 import cardBg from "./Aboutus1.jpg";
 import CarouselComponent from './CarouselComponent';
+import SingleLineImageList from './ImageList.jsx';
 
 
   const LightTooltip = withStyles((theme) => {
@@ -123,6 +124,8 @@ const PackageCard = ({ title, command, description, icons, image }) => {
     </Card>
   )
 }
+
+
 
 const PageContent = ({ setComponents }) => {
   return (
@@ -324,6 +327,30 @@ const PageContent = ({ setComponents }) => {
 
       </Paper>
       
+      <Paper
+        elevation={3}
+        style={{
+          width: '100%',
+          margin: '2% 0',
+          maxWidth: '90%',
+          borderRadius: 15,
+          minHeight: '60vh',
+          background:`url(${cardBg})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        
+
+        <Typography
+          variant="h3"
+          //color="textSecondary"
+          style={{ margin: 16, textAlign: 'center' }}
+        >
+          Gallery
+        </Typography>
+        <SingleLineImageList />
+      </Paper>
       
       <Paper
         elevation={3}
