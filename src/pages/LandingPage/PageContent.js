@@ -12,6 +12,7 @@ import {
   Button } from '@material-ui/core'
 import {
   withStyles,
+  makeStyles,
   lighten,
   darken } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -38,6 +39,28 @@ tooltip: {
 }
 }})(Tooltip);
 
+
+const useStyles = makeStyles({
+    
+  zoomIn: {
+    '&:hover': {
+      transform: 'scale(1.1)',
+      overflow: 'hidden',
+      transition: 'all 1.2s',
+    },
+  },
+
+  "@keyframes slideDown": {
+    from: {
+      transform: 'scale(1,1)'
+    },
+    
+    to: {
+        transform: 'scale(1.1,1.1)'
+    }
+  }
+});
+
 const PackageCard = ({ title, command, description, icons, image }) => {
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
@@ -46,6 +69,8 @@ const PackageCard = ({ title, command, description, icons, image }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const styleClass = useStyles();
 
   return (
     <Card elevation={4} style={{ margin: 18, maxWidth: 350 }}>
@@ -58,7 +83,7 @@ const PackageCard = ({ title, command, description, icons, image }) => {
           {title}
         </Typography>
         <CardMedia
-        // className={classes.media}
+        className={styleClass.zoomIn}
         style={{
           height: 0,
           paddingTop: '56.25%', // 16:9
@@ -66,57 +91,7 @@ const PackageCard = ({ title, command, description, icons, image }) => {
         image={image}
         title="Paella dish"
         />
-        {/* <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            backgroundColor: '#F3F4F4',
-            padding: 8,
-          }}
-        > */}
-          {/* <Typography
-            gutterBottom
-            variant="body1"
-            color="textSecondary"
-            component="h2"
-          >
-            {command}
-          </Typography>
-          {/* <Tooltip */}
-          {/* <LightTooltip
-            title={
-            <Button
-              color='inherit'
-              startIcon={<CheckCircleOutlineIcon />}
-            >
-              Copied to clipboard!
-            </Button>
-            }
-            placement="bottom"
-            open={open}
-            leaveDelay={1000}
-            onClose={handleClose} > */} 
-          {/* <IconButton
-            aria-label="Icon button"
-            onClick={() => {
-              if (window.clipboardData) {
-                // Internet Explorer
-                window.clipboardData.setData('Text', command)
-              } else {
-                try {
-                  navigator.clipboard.writeText(command)
-                } catch (error) {}
-              }
-              handleClick()
-            }}
-          > */}
-            {/* <FileCopy />
-          </IconButton> */}
-          {/* </LightTooltip> */}
-        {/* </div> */}
-        {/* <br />
-        {icons}
-        <br /> */}
+        
         <Typography variant="body2" component="div">
           {description}
         </Typography>
@@ -128,6 +103,7 @@ const PackageCard = ({ title, command, description, icons, image }) => {
 
 
 const PageContent = ({ setComponents }) => {
+  const classes = useStyles()
   return (
     <React.Fragment>
 
@@ -195,6 +171,7 @@ const PageContent = ({ setComponents }) => {
                     display: 'flex',
                     justifyContent: 'space-around',
                   }}
+                  className={classes.zoomIn}
                 >
                   <img
                     src="react.png"
@@ -221,6 +198,7 @@ const PageContent = ({ setComponents }) => {
                     display: 'flex',
                     justifyContent: 'space-around',
                   }}
+                  className={classes.zoomIn}
                 >
                   <img
                     src="react.png"
@@ -246,6 +224,7 @@ const PageContent = ({ setComponents }) => {
                     display: 'flex',
                     justifyContent: 'space-around',
                   }}
+                  className={classes.zoomIn}
                 >
                   <img
                     src="react.png"
@@ -300,19 +279,11 @@ const PageContent = ({ setComponents }) => {
             </Typography>
           </Slide>
 
-          <div
-            style={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <TrackChanges style={{ fontSize: 150, color: 'white' }} />
-          </div>
+          
 
           <Flip left>
             <Typography
-              variant="h5"
+              variant="h8"
               component="div"
               style={{ margin: 16, textAlign: 'center', color: 'grey' }}
             >

@@ -4,14 +4,14 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { Helmet } from 'react-helmet'
 import { Scrollbars } from 'react-custom-scrollbars'
 import Toolbar from '@material-ui/core/Toolbar'
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { ThemeProvider, createMuiTheme, responsiveFontSizes, withStyles , makeStyles} from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
 import { useHistory } from 'react-router-dom'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
-import background from "./homepage.jpg";
-import cardBg from "./Aboutus.jpg"
-import {Zoom, Fade, Roll} from 'react-reveal';
+import background from "../../gallery/08.jpg";
+import background1 from "../../gallery/01.jpg";
+import { Roll} from 'react-reveal';
 
 const PageContent = lazy(() => import('./PageContent'))
 const Footer = lazy(() => import('./Footer'))
@@ -19,7 +19,7 @@ const ResponsiveMenu = lazy(() =>
   import('rmw-shell/lib/containers/ResponsiveMenu')
 )
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   palette: {
     primary: { main: '#242424' },
     secondary: {
@@ -27,6 +27,32 @@ const theme = createMuiTheme({
     },
   },
 })
+
+theme = responsiveFontSizes(theme);
+
+
+
+
+const useStyles = makeStyles({
+  transitionGroup: {
+    backgroundImage: `url(${background1})`,
+    animation: "$slideDown 8s infinite alternate"
+  },
+  
+  zoomIn: {
+    animation: "$slideDown 8s"
+  },
+
+  "@keyframes slideDown": {
+    from: {
+      transform: 'scale(1,1)'
+    },
+    
+    to: {
+        transform: 'scale(1.1,1.1)'
+    }
+  }
+});
 
 const LandingPage = () => {
   const [scrollbar, setScrollbar] = useState(null)
@@ -44,6 +70,8 @@ const LandingPage = () => {
         alignToTop: true,
       })
   }
+
+  const classes = useStyles();
 
   const sections = [
     {
@@ -150,18 +178,19 @@ const LandingPage = () => {
 
             <div
               ref={(r) => r && setTop(r)}
+              className={classes.transitionGroup}
               style={{
-                height: '100vh',
                 backgroundColor: 'blue',
                 backgroundRepeat: 'no-repeat',
                 backgroundAttachment: 'fixed',
                 backgroundImage: `url(${background})`,
+                backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 display: 'flex',
                 justifyContent: 'center',
-                minHeight: 600,
-                animation: 'shrinkeven 8s infinite alternate',
-                transition: 'all 300ms ease-in-out'
+                minHeight: '100vh',
+                
+                alignItems: 'center',
               }}
             >
 
@@ -171,37 +200,36 @@ const LandingPage = () => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   flexDirection: 'column',
+                  height: '100%',
                 }}
               >
                 
 
-                <div style={{ padding: 8 }}>
                 <Roll right>
                   <h3
                     style={{
                       color: 'red',
                       textAlign: 'center',
                       fontWeight: 'bold',
-                      fontSize: 50,
+                      fontSize: '4vw',
                     }}
                   >
                     Prestige Sunrise Park
                   </h3>
-                  </Roll>
+                </Roll>
 
-                  <Roll left>
+                <Roll left>
                   <h4
                     style={{
                       color: 'white',
                       textAlign: 'center',
-                      fontSize: 25,
+                      fontSize: '2vw',
                       marginTop: -40,
                     }}
                   >
                     Welcome to Prestige Sunrise Park, a place we call “Home” 
                   </h4>
-                  </Roll>
-                </div>
+                </Roll>
               </div>
             </div>
             
@@ -212,6 +240,8 @@ const LandingPage = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
+                backgroundColor: '#e6e6e6',
+
               }}
             >
               
@@ -220,7 +250,7 @@ const LandingPage = () => {
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'center',
-                    marginTop: -50,
+                    marginTop: -80,
                   }}
                 >
                   <Button
