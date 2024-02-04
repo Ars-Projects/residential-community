@@ -15,6 +15,7 @@ import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import Paper from '@material-ui/core/Paper'
 import blogArticleImage from './blogArticle.jpg'
 import {Zoom, Fade, Roll, Slide} from 'react-reveal';
+import axios from "axios";
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,13 +43,8 @@ const BlogArticle = () => {
   const { uid } = useParams()
   const intl = useIntl()
 
-  const noticeInitialData = [{slno:'1',Category:'Announcements',Title:'abcd',ShortContent:'abcdef',Pdflink:''},
-{slno:'2',Category:'',Title:'efg',ShortContent:'abcdef',Pdflink:''},
-{slno:'3',Category:'',Title:'hij',ShortContent:'abcdef',Pdflink:''},
-{slno:'4',Category:'',Title:'lmn',ShortContent:'abcdef',Pdflink:''},
-{slno:'5',Category:'',Title:'opq',ShortContent:'abcdef',Pdflink:''}];
-const noticeInitData = [{slno:'1',Category:'Announcements',Title:'abcd',ShortContent:'abcdef',Pdflink:''},
-{slno:'2',Category:'Announcements',Title:'abcd',ShortContent:'abcdef',Pdflink:''}];
+const noticeInitData = [{Order_id:'1',Name:'Announcements',Email:'abcd',Phone:'abcdef',Weight:'', Address: ''},
+{Order_id:'1',Name:'Announcements',Email:'abcd',Phone:'abcdef',Weight:'', Address: ''}];
 
 const [NoticeData, setNoticeData] = useState(noticeInitData);
 const [SelectCategory, setSelectCategory] = useState([{Category:'Announcements'}]); 
@@ -60,30 +56,40 @@ const [top, setTop] = useState(null)
     const loadData = async ()=>{
 
 
-      await Tabletop.init({ key: 'https://docs.google.com/spreadsheets/d/1GxzFL0XwueoCTodpR74_-fj23_nRy7OKSQAGK4fvLi0/pubhtml',
-                      simpleSheet: true 
-                          }).then((data) => {
-                            if(data){
-                              data.forEach( covidRow => {
-                                  console.log(`Data per row  is ${JSON.stringify(covidRow)}`)
-                                })
-                                setNoticeData(data);
-                              }
+      await axios.post(
+    "https://www.wixapis.com/stores/v2/orders/query",{
+      "query": {
+              "filter": "{\"paymentStatus\": \"PAID\"}"
+          }
+    },
+    {
+      headers: {
+        Authorization: `IST.eyJraWQiOiJQb3pIX2FDMiIsImFsZyI6IlJTMjU2In0.eyJkYXRhIjoie1wiaWRcIjpcImY3MjdlNDZhLWM0NDktNDcxNS05NjU2LWVhY2RkNjYxZjg3MVwiLFwiaWRlbnRpdHlcIjp7XCJ0eXBlXCI6XCJhcHBsaWNhdGlvblwiLFwiaWRcIjpcIjNkMGM2YmFkLTQzODktNDJiYy1hM2RmLWQ0MmJjMWE4ZWE0NVwifSxcInRlbmFudFwiOntcInR5cGVcIjpcImFjY291bnRcIixcImlkXCI6XCIxNDg3NGE3YS1lZjAwLTRiYzctYWU4MC1hYTkwMmRhYTlhNWVcIn19IiwiaWF0IjoxNzAxODc3Mjk4fQ.BQYhDhMospDnZWnVZFy2_NU9WtJVn1_8uFfNyxvKQfZTkox14hI2OtcvSPk7mz_jnIgOAKWoJVksTsZKh8XwyY3jAaYuF7NmiDHQ-QyEacLzUOKc9YAayNyOyLQtnHV2cg1txV1bWQlffpp0ZtPNRzFyw9dyKarsIfigLs3MWNoL86uyc9NNiEvRBQEzVh1vnlLXDfzOzhoknutwUTp9GD6Uep_i9knr-HclmWLWrw4cZXawzPSywL-GYI1OaEx_7USvtexD2gcxAyTQRxmMuz_v9Vw1BnMFBngSDAQkHtB1UQfwJ0uXKQs-7-FtnCfHXrLnd2SjxcHlQHFYFI-19g`,
+        'wix-site-id': '89793f6a-425e-441a-96b3-09aef0ea4125',
+        'Content-Type': 'application/json'
+      },
+    }
+  ).then((data) => {
+            if(data){
+              data.forEach( covidRow => {
+                  console.log(`wix data is ${JSON.stringify(covidRow)}`)
+                })
+                setNoticeData(data);
+              }
 
-  
-                              
-                               let Category = _.chain(data)
-                                  // Group the elements of Array based on `color` property
-                                  .groupBy("Category")
-                                  // `key` is group's name (color), `value` is the array of objects
-                                  .map((value, key) => ({ Category: key}))
-                                  .value()
-                                  setSelectCategory(Category);
-                              console.log(`category is ${JSON.stringify(Category)}`);  
-                       
-                      }
-                      )
-                      .catch((err) => console.warn(err));
+
+            let Category = _.chain(data)
+              // Group the elements of Array based on `color` property
+              .groupBy("Category")
+              // `key` is group's name (color), `value` is the array of objects
+              .map((value, key) => ({ Category: key}))
+              .value()
+              setSelectCategory(Category);
+              console.log(`category is ${JSON.stringify(Category)}`);  
+        
+      }
+      )
+      .catch((err) => console.warn(err));
     }
   
       loadData();

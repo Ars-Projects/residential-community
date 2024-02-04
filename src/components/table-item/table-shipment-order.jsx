@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { DateRangePicker } from "materialui-daterange-picker";
 import { 
     Table,
     TableBody,
@@ -15,12 +14,8 @@ import {
     TablePagination,
     TableFooter
  } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Popup from 'components/controls/Popup';
-import OrderForm from 'pages/Notice/orderForm';
-import TableShipmentOrder from './table-shipment-order';
-import SearchBar from "material-ui-search-bar";
-import axios from "axios";
+ import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -56,8 +51,15 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-const TableNotice = () => {
-  const noticeInitData = [
+const TableShipmentOrder = ({shipmentData}) => {
+  console.log(`shipment table data is ${JSON.stringify(shipmentData)}`);
+//   console.log(`row.totals.weight is ${JSON.stringify(shipmentData[0].totals.weight)}`)
+  const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
+
+  const shipmentorderInitData = [
     {
         "id": "d2f8c589-8539-448c-bd3a-bc8d59079ed8",
         "number": 10001,
@@ -348,21 +350,45 @@ const TableNotice = () => {
         "refunds": [],
         "isInternalOrderCreate": false
     },]
-const [NoticeData, setNoticeData] = React.useState(noticeInitData); 
-  console.log(`order table data is ${JSON.stringify(NoticeData.length)}`);
-  // console.log(`row.totals.weight is ${JSON.stringify(NoticeData[0].totals.weight)}`)
-  const classes = useStyles();
-  const [rows, setRows] = React.useState(NoticeData);
-  const [page, setPage] = React.useState(0);
-  const [openPopup, setOpenPopup] = React.useState(false)
-  const [rowsPerPage, setRowsPerPage] = React.useState(25);
-  const [recordForEdit, setRecordForEdit] = React.useState(null)
-
-
-  const [searched, setSearched] = React.useState("");
-
-  const [open, setOpen] = React.useState(false);
-  const [dateRange, setDateRange] = React.useState({});
+//   [
+//         {
+//             "id": "113",
+//             "name": "Delhivery 20KG Reverse",
+//             "freight_charges": 830,
+//             "cod_charges": 0,
+//             "total_charges": 830,
+//             "edd": "14-12-2023",
+//             "min_weight": 20000,
+//             "chargeable_weight": 20000,
+//             "reverse_qc": false,
+//             "reverse ": true
+//         },
+//         {
+//             "id": "66",
+//             "name": "Amazon Shipping",
+//             "freight_charges": 108,
+//             "cod_charges": 30,
+//             "total_charges": 138,
+//             "edd": "14-12-2023",
+//             "min_weight": 500,
+//             "chargeable_weight": 1000,
+//             "reverse_qc": false,
+//             "reverse ": false
+//         },
+//         {
+//             "id": "37",
+//             "name": "Amazon Shipping 1 KG",
+//             "freight_charges": 84.5,
+//             "cod_charges": 26.5,
+//             "total_charges": 111,
+//             "edd": "14-12-2023",
+//             "min_weight": 1000,
+//             "chargeable_weight": 1000,
+//             "reverse_qc": false,
+//             "reverse ": false
+//         }]
+  const [shipmentorderData, setshipmentorderData] = React.useState(shipmentorderInitData); 
+ 
 
   React.useEffect(() => {
   loadData();
@@ -372,156 +398,141 @@ const [NoticeData, setNoticeData] = React.useState(noticeInitData);
   }, [])
   const loadData = async ()=>{
 
-  console.log(`dateRange is ${JSON.stringify(dateRange)}`);
-  const data = await axios.post(
-      "http://localhost:4000/getWixOrders",{
-        "query": {
-          "paging": {
-              "limit": 100
-          },
-          "sort": "[{\"dateCreated\": \"desc\"}]"
-        }
-      },
-      {
-        headers: {
-          Authorization: `IST.eyJraWQiOiJQb3pIX2FDMiIsImFsZyI6IlJTMjU2In0.eyJkYXRhIjoie1wiaWRcIjpcImY3MjdlNDZhLWM0NDktNDcxNS05NjU2LWVhY2RkNjYxZjg3MVwiLFwiaWRlbnRpdHlcIjp7XCJ0eXBlXCI6XCJhcHBsaWNhdGlvblwiLFwiaWRcIjpcIjNkMGM2YmFkLTQzODktNDJiYy1hM2RmLWQ0MmJjMWE4ZWE0NVwifSxcInRlbmFudFwiOntcInR5cGVcIjpcImFjY291bnRcIixcImlkXCI6XCIxNDg3NGE3YS1lZjAwLTRiYzctYWU4MC1hYTkwMmRhYTlhNWVcIn19IiwiaWF0IjoxNzAxODc3Mjk4fQ.BQYhDhMospDnZWnVZFy2_NU9WtJVn1_8uFfNyxvKQfZTkox14hI2OtcvSPk7mz_jnIgOAKWoJVksTsZKh8XwyY3jAaYuF7NmiDHQ-QyEacLzUOKc9YAayNyOyLQtnHV2cg1txV1bWQlffpp0ZtPNRzFyw9dyKarsIfigLs3MWNoL86uyc9NNiEvRBQEzVh1vnlLXDfzOzhoknutwUTp9GD6Uep_i9knr-HclmWLWrw4cZXawzPSywL-GYI1OaEx_7USvtexD2gcxAyTQRxmMuz_v9Vw1BnMFBngSDAQkHtB1UQfwJ0uXKQs-7-FtnCfHXrLnd2SjxcHlQHFYFI-19g`,
-          'wix-site-id': '89793f6a-425e-441a-96b3-09aef0ea4125',
-          'wix-account-id': '14874a7a-ef00-4bc7-ae80-aa902daa9a5e',
-          'Content-Type': 'application/json',
-        },
-      }
-    )
-    console.log(`data fetched from orders ${data.data}`);
-    setNoticeData(data.data);
-
-    }
-
-  const requestSearch = (searchedVal) => {
-    console.log(`searchedVal is ${searchedVal}`);
-    const filtered = NoticeData.filter((row) => {
-      return row?.buyerInfo?.firstName.toLowerCase().includes(searchedVal.toLowerCase()) 
-      || row.billingInfo.address.addressLine1.toLowerCase().includes(searchedVal.toLowerCase()) || row.fulfillmentStatus.toLowerCase().includes(searchedVal.toLowerCase());
-    });
-    console.log(`filtered is ${filtered}`);
-    setOpen(true);
-    setRows(filtered);
-  };
-
-  const toggle = async () => {
-    console.log(`fromTime is ${JSON.stringify(dateRange)} and toTime is ${JSON.stringify(dateRange)}`);
-    const endTime = Number(new Date(dateRange.endDate));
-    const startTime = Number(new Date(dateRange.startDate));
-    const dateFilter = `{"$and": [{"lastUpdated":{"$lte": ${endTime}}}, {"lastUpdated":{"$gte": ${startTime}}}]}`;
+    const weight=parseInt(shipmentData?.totals?.weight ?? "1")*1000;
+    console.log(`shipment zipcode is ${shipmentData.billingInfo}`);
     const body = {
-      query: {
-        paging: {
-          limit: 100
-        },
-        filter: dateFilter,
-        sort: "[{\"dateCreated\": \"desc\"}]"
-      }
-    }
-    const data =  await axios.post(
-    "http://localhost:4000/getWixOrders",
-    body,
-    // {
-    // "query": {
-    //     "paging": {
-    //         "limit": 100
-    //     },
-    //     "filter": "{\"$and\": [{\"lastUpdated\":{\"$lte\": endTime}}, {\"lastUpdated\":{\"$gte\": startTime}}]}",
-    //     "sort": "[{\"dateCreated\": \"desc\"}]"
-    //     }
-    // },
-    {
-      headers: {
-        Authorization: `IST.eyJraWQiOiJQb3pIX2FDMiIsImFsZyI6IlJTMjU2In0.eyJkYXRhIjoie1wiaWRcIjpcImY3MjdlNDZhLWM0NDktNDcxNS05NjU2LWVhY2RkNjYxZjg3MVwiLFwiaWRlbnRpdHlcIjp7XCJ0eXBlXCI6XCJhcHBsaWNhdGlvblwiLFwiaWRcIjpcIjNkMGM2YmFkLTQzODktNDJiYy1hM2RmLWQ0MmJjMWE4ZWE0NVwifSxcInRlbmFudFwiOntcInR5cGVcIjpcImFjY291bnRcIixcImlkXCI6XCIxNDg3NGE3YS1lZjAwLTRiYzctYWU4MC1hYTkwMmRhYTlhNWVcIn19IiwiaWF0IjoxNzAxODc3Mjk4fQ.BQYhDhMospDnZWnVZFy2_NU9WtJVn1_8uFfNyxvKQfZTkox14hI2OtcvSPk7mz_jnIgOAKWoJVksTsZKh8XwyY3jAaYuF7NmiDHQ-QyEacLzUOKc9YAayNyOyLQtnHV2cg1txV1bWQlffpp0ZtPNRzFyw9dyKarsIfigLs3MWNoL86uyc9NNiEvRBQEzVh1vnlLXDfzOzhoknutwUTp9GD6Uep_i9knr-HclmWLWrw4cZXawzPSywL-GYI1OaEx_7USvtexD2gcxAyTQRxmMuz_v9Vw1BnMFBngSDAQkHtB1UQfwJ0uXKQs-7-FtnCfHXrLnd2SjxcHlQHFYFI-19g`,
-        'wix-site-id': '89793f6a-425e-441a-96b3-09aef0ea4125',
-        'wix-account-id': '14874a7a-ef00-4bc7-ae80-aa902daa9a5e',
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-    console.log(`data fetched from toggled orders ${data.data}`);
-    setNoticeData(data.data);
-  setOpen(!open)
-  };
+        "origin" : "570023",
+        "destination" : shipmentData.billingInfo.address.zipCode,
+        "payment_type" : "prepaid",
+        "weight" : weight.toString(),
+        "length" : "10",
+        "breadth" : "10",
+        "height" : "10"
+    };
+    console.log(`the body is ${JSON.stringify(body)}`);
+    const shipmentOrderDataList = await axios.post(
+    "http://localhost:4000/getShippingClientLists",
+    body
+    );
+    console.log(`shipmentOrderDataList.data is ${shipmentOrderDataList.data}`);
+    setshipmentorderData(shipmentOrderDataList.data);
 
-  const cancelSearch = () => {
-    setSearched("");
-    requestSearch(searched);
-    setOpen(false);
-  };
-
+    }
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const openInPopup = item => {
-        setOpenPopup(true)
-    }
-
-  const addOrEdit = (employee, resetForm) => {
-      if (employee.id == 0)
-          // employeeService.insertEmployee(employee)
-      // else
-          // employeeService.updateEmployee(employee)
-      resetForm()
-      setRecordForEdit(null)
-      setOpenPopup(false)
-      // setRecords(employeeService.getAllEmployees())
-  }
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const createShippingOrder = async (shippingClient, shipmentData) => {
+    console.log(`inside createShippingOrder with data ${shippingClient.id} 
+    and ${JSON.stringify(shipmentData.billingInfo)} and ${JSON.stringify(shipmentData.shipmentDetails)}`);
+    const phoneLen = shipmentData.billingInfo.address.phone.length;
+    const phone = shipmentData.billingInfo.address.phone.slice(phoneLen-10, phoneLen);
 
+    const orderList = [
+        ];
+    shipmentData.lineItems.forEach( lineItem => {
+        orderList.push({
+            name: lineItem.name,
+            qty: lineItem.quantity,
+            price: lineItem.price,
+            sku: lineItem.sku,
+        })
+    })    
+    // Create the shipping order and update the wix order
+    const shipmentOrderDataList = await axios.post(
+    "http://localhost:4000/createShippingOrder",
+    {
+        "order_number": shipmentData.number,
+        "payment_type": "prepaid",
+        "order_amount": 1000,
+        "consignee": {
+            "name": `${shipmentData.buyerInfo.firstName} ${shipmentData.buyerInfo.lastName}`,
+            "address": `${shipmentData.billingInfo.address.addressLine1}`,
+            "address_2": "",
+            "city": `${shipmentData.billingInfo.address.city}`,
+            "state": `${shipmentData.billingInfo.address.subdivision}`,
+            "pincode": `${shipmentData.billingInfo.address.zipCode}`,
+            "phone": `${phone}`,
+        },
+        "pickup": {
+            "warehouse_name": "warehouse 1",
+            "name" : "grassroots organic farms",
+            "address": "#94 , EWS 1st. Stage,",
+            "address_2": "Kuvempunagara near mahadeshwara floor mill",
+            "city": "Mysore",
+            "state": "Haryana",
+            "pincode": "570023",
+            "phone": "9164468870"
+        },
+        "order_items": orderList,
+        "courier_id": shippingClient.id
+    }
+    );
+    // console.log(`shipmentOrderDataList is ${JSON.stringify(shipmentOrderDataList)}`);
+
+    const result = shipmentOrderDataList.data;
+    console.log(`result shipmentOrderDataList is ${JSON.stringify(result)}`);
+    const updateWixOrder = await axios.post(
+    `http://localhost:4000/updateShippingOrder?id=${shipmentData.id}`,
+    {
+        "fulfillment": {
+            "lineItems": [{
+                "index": 1,
+                "quantity": 1
+            }],
+
+        },
+        "trackingInfo": {
+            "shippingProvider": result.data.courier_name,
+            "trackingNumber" : result.data.shipment_id,
+            "trackingLink": `https://ship.nimbuspost.com/shipping/tracking/${result.data.awb_number}`,
+        },
+    }
+    );
+    if(result?.status){
+        alert(`Shipping Order is created for ${shipmentData.buyerInfo.firstName} ${shipmentData.buyerInfo.lastName}`);
+        // Update the wix order with shipping fulfillment status
+        
+    } else {
+        alert(`error is ${JSON.stringify(result.message)}`);
+    }
+  }
   return (
-        <>
-      <Paper>
-        
-        <SearchBar
-          value={searched}
-          onChange={(searchVal) => requestSearch(searchVal)}
-          onCancelSearch={() => cancelSearch()}
-        />
-        <DateRangePicker
-        open={open}
-        toggle={toggle}
-        onChange={(range) => setDateRange(range)}
-      />
     <TableContainer component={Paper} className={classes.tableContainer}>
-        
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className={classes.tableHeaderCell}>Order_id</TableCell>
+            <TableCell className={classes.tableHeaderCell}>id</TableCell>
             <TableCell className={classes.tableHeaderCell}>Name</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Date</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Address</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Shipping Status</TableCell>
+            <TableCell className={classes.tableHeaderCell}>freight_charges</TableCell>
+            <TableCell className={classes.tableHeaderCell}>cod_charges</TableCell>
+            <TableCell className={classes.tableHeaderCell}>total_charges</TableCell>
             {/* <TableCell className={classes.tableHeaderCell}>Create Order</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+          {shipmentorderData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
             <TableRow key={row.id}>
               <TableCell> <Typography className={classes.name}>{row.id}</Typography></TableCell>
-              <TableCell> <Typography className={classes.name}>
-                {`${row?.buyerInfo?.firstName ?? ''}`}
-                </Typography></TableCell>
-              <TableCell> <Typography className={classes.name}>{`${new Date(row.dateCreated).toLocaleString()}`}</Typography></TableCell>
-              <TableCell> <Typography className={classes.name}>{`${JSON.stringify(row.billingInfo.address.addressLine1)}`}</Typography></TableCell>
-              <TableCell> <Typography className={classes.name}>{ row.fulfillmentStatus }</Typography></TableCell>
+              <TableCell> <Typography className={classes.name}>{`${row.name}`}</Typography></TableCell>
+              <TableCell> <Typography className={classes.name}>{row.freight_charges}</Typography></TableCell>
+              <TableCell> <Typography className={classes.name}>{row.cod_charges}</Typography></TableCell>
+              <TableCell> <Typography className={classes.name}>{row.total_charges}</Typography></TableCell>
               <TableCell>
                   <Typography color="primary" variant="subtitle2">{row.ShortContent}</Typography>
                 </TableCell>
                 <TableCell>
                 {row.id?<Button variant="outlined" color="primary" size="small" 
-                  onClick={() => { setOpenPopup(true); setRecordForEdit(row)}}>
-                    create order
+                  onClick={async () => {
+                    await createShippingOrder(row, shipmentData);
+                  }}>
+                    create shipment
                   </Button>: <Button variant="contained" disabled>
-                    create order
+                    create shipment
                   </Button>}
                   
                 </TableCell>
@@ -532,7 +543,7 @@ const [NoticeData, setNoticeData] = React.useState(noticeInitData);
         <TablePagination
             rowsPerPageOptions={[25, 50, 75, 100]}
             component="div"
-            count={rows.length}
+            count={shipmentData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
@@ -540,26 +551,8 @@ const [NoticeData, setNoticeData] = React.useState(noticeInitData);
         />
         </TableFooter>
       </Table>
-      <Popup
-                title="Order Form"
-                openPopup={openPopup}
-                setOpenPopup={setOpenPopup}
-            >
-                <TableShipmentOrder
-                    shipmentData={recordForEdit}
-                     />
-            </Popup>
     </TableContainer>
-    </Paper>
-      <br />
-      <a
-        target="_blank"
-        href="https://smartdevpreneur.com/the-easiest-way-to-implement-material-ui-table-search/"
-      >
-        Learn how to add search and filter to Material-UI Table here.
-      </a>
-    </>
   );
 }
 
-export default TableNotice;
+export default TableShipmentOrder;
